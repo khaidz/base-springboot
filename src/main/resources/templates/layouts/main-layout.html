@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">Base SpringBoot</title>
+    <!-- App css -->
+
+    <link th:href="@{/assets/css/select2.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/bootstrap-material.min.css}" rel="stylesheet" type="text/css"
+          id="bs-default-stylesheet"/>
+    <link th:href="@{/assets/css/app-material.min.css}" rel="stylesheet" type="text/css" id="app-default-stylesheet"/>
+    <link th:href="@{/assets/css/bootstrap-material-dark.min.css}" rel="stylesheet" type="text/css"
+          id="bs-dark-stylesheet"/>
+    <link th:href="@{/assets/css/app-material-dark.min.css}" rel="stylesheet" type="text/css" id="app-dark-stylesheet"/>
+    <!-- icons -->
+    <link th:href="@{/assets/css/icons.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/jquery.toast.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" type="text/css"/>
+    <th:block layout:fragment="css"></th:block>
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+
+</head>
+<body class="loading">
+<!-- Begin page -->
+<div id="wrapper">
+
+    <div th:replace="~{fragments/left-sidebar-fragment :: .left-side-menu}"/>
+
+    <!-- Start Page Content here -->
+    <div class="content-page">
+        <div class="content">
+            <div th:replace="~{fragments/topbar-fragment:: .navbar-custom}"/>
+
+            <!-- Start Content-->
+            <div layout:fragment="content"></div>
+            <!-- end content -->
+        </div>
+
+        <div th:replace="~{fragments/footer-fragment:: .footer}"/>
+
+    </div>
+    <!-- End Page content -->
+</div>
+<!-- END wrapper -->
+
+<div th:replace="~{fragments/rightbar-fragment:: .right-bar}"/>
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+<div id="load">
+    <div class="loader"></div>
+</div>
+
+<!-- Vendor js -->
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/select2.min.js}"></script>
+<!-- App js -->
+<script th:src="@{/assets/js/app.min.js}"></script>
+<script th:src="@{/assets/js/jquery.toast.min.js}"></script>
+<script th:src="@{/assets/js/custom.js}"></script>
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>

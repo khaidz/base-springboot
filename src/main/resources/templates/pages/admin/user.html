@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main-layout}">
+<head>
+    <title>Người dùng</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box page-title-box-alt">
+                    <h4 class="page-title">Quản lý người dùng</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Base SpringBoot</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
+                            <li class="breadcrumb-item active">Người dùng</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-2" th:if="${alert != null}">
+                            <li class="text-success" th:text="${alert}"></li>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="input-search-text">Thông tin</label>
+                                    <input class="form-control" type="text" placeholder="Nhập từ khoá tìm kiếm"
+                                           id="input-search-text"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="select-status">Trạng thái</label>
+                                    <select class="form-control" id="select-status">
+                                        <option value="">Tất cả</option>
+                                        <option value="0">Hoạt động</option>
+                                        <option value="1">Ngừng hoạt động</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex flex-column justify-content-end">
+                                <div class="form-group d-flex">
+                                    <button class="btn btn-primary mr-2" id="btn-search"><i class="fe-search mr-1"></i>
+                                        Tìm kiếm
+                                    </button>
+                                    <button id="btn-create" class="btn btn-primary"><i
+                                            class="mdi mdi-plus-circle mr-1"></i> Tạo mới
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div> <!-- end row -->
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                            <tr>
+                                <th style="width: 15%">Họ và tên</th>
+                                <th style="width: 15%">Username</th>
+                                <th style="width: 10%">Số điện thoại</th>
+                                <th style="width: 15%">Email</th>
+                                <th style="width: 10%">Ngày sinh</th>
+                                <th style="width: 20%">Địa chỉ</th>
+                                <th style="width: 10%">Tình trạng</th>
+                                <th style="width: 5%">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item, state: ${dataList}">
+                                <td th:text="${item.getFullName()}"></td>
+                                <td th:text="${item.getUsername()}"></td>
+                                <td th:text="${item.getPhoneNumber()}"></td>
+                                <td th:text="${item.getEmail()}"></td>
+                                <td th:text="${item.getBirthdayFormat()}"></td>
+                                <td th:text="${item.getAddress()}"></td>
+                                <td>
+                                    <span class="badge badge-soft-success"
+                                          th:if="${item.getIsDeleted() == 0}">Đang hoạt động</span>
+                                    <span class="badge badge-soft-danger"
+                                          th:if="${item.getIsDeleted() != 0}">Ngừng hoạt động</span>
+                                </td>
+                                <td>
+                                    <ul class="list-inline table-action m-0">
+                                        <li class="list-inline-item" style="cursor: pointer">
+                                            <a th:href="|/admin/user/${item.getId()}|" th:attr="data-id=${item.getId()}"
+                                               class="action-icon btn-edit"> <i
+                                                    class="mdi mdi-square-edit-outline"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div th:replace="~{fragments/pagination-fragment :: pagination(${page}) }"></div>
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+        <!-- end row-->
+
+    </div> <!-- container-fluid -->
+</div>
+
+
+<th:block layout:fragment="script">
+    <script>
+        $("#select-status").select2({minimumResultsForSearch: -1})
+
+        $('#btn-search').on('click', function () {
+            location.href = getUrlSearch()
+        })
+        $("#btn-create").on('click', function () {
+            location.href = "/admin/user/create";
+        })
+
+        /* ============ Set lại giá trị khi load trang ============ */
+        if (!!getQueryParam('status')) {
+            $('#select-status').val(getQueryParam('status')).trigger('change')
+        }
+        if (!!getQueryParam('searchText')) {
+            $('#input-search-text').val(getQueryParam('searchText'))
+        }
+
+        function getUrlSearch() {
+            const queryString = window.location.search;
+            let searchParams = new URLSearchParams(queryString);
+            searchParams.set('searchText', $('#input-search-text').val())
+            searchParams.set('status', getValueSelect2('#select-status'))
+            searchParams.set('page', '0')
+            return location.origin + location.pathname + '?' + urlSearchParamsToText(searchParams);
+        }
+    </script>
+
+</th:block>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/auth-layout}">
+<head>
+    <title>Đăng ký tài khoản</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="text-center w-75 m-auto">
+                                <div class="auth-logo">
+                                    <a href="/static" class="logo logo-dark text-center">
+                                        <span class="logo-lg">
+                                            <img th:src="@{/assets/images/logo-dark.png}" alt="" height="22">
+                                        </span>
+                                    </a>
+
+                                    <a href="/static" class="logo logo-light text-center">
+                                        <span class="logo-lg">
+                                            <img th:src="@{/assets/images/logo-light.png}" alt="" height="22">
+                                        </span>
+                                    </a>
+                                </div>
+                                <p class="text-muted mb-4 mt-3">Chưa có tài khoản? Tạo tài khoản mới chưa mất tới một phút</p>
+                            </div>
+                            <div th:if="${errors != null}" class="mb-2">
+                                <li class="text-danger" th:each="e : ${errors}">[[${e}]]</li>
+                            </div>
+                            <form method="post" th:object="${registerDto}">
+                                <div class="form-group">
+                                    <label for="username">Tên đăng nhập</label>
+                                    <input class="form-control" type="text" id="username" placeholder="user001"
+                                           required th:field="*{username}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mật khẩu</label>
+                                    <div class="input-group input-group-merge">
+                                        <input type="password" id="password" class="form-control"
+                                               placeholder="******" th:field="*{password}">
+                                        <div class="input-group-append" data-password="false">
+                                            <div class="input-group-text">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" required
+                                           placeholder="nguyenvana@gmail.com" th:field="*{email}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fullName">Họ và tên</label>
+                                    <input class="form-control" type="text" id="fullName" placeholder="Nguyễn Văn A"
+                                           required th:field="*{fullName}">
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox-signup">
+                                        <label class="custom-control-label" for="checkbox-signup">Tôi đồng ý với <a
+                                                href="javascript: void(0);" class="text-dark">Chính sách và quy định</a></label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0 text-center">
+                                    <button class="btn btn-primary btn-block" type="submit"> Đăng ký</button>
+                                </div>
+                            </form>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">Đã có tài khoản?
+                                <a th:href="@{/auth/login}"
+                                   class="text-primary font-weight-medium ml-1">Đăng nhập</a>
+                            </p>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+</div>
+</body>
+</html>

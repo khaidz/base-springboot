@@ -1,0 +1,43 @@
+.right-bar{
+    width: 700px;
+    max-width: 90%;
+    right: -710px;
+}
+.jq-toast-single h2{
+    font-weight: 700;
+}
+.pagination .paginate_button:not(.disabled) {
+    cursor: pointer;
+}
+
+#load{
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    z-index:9999;
+    top: 0;
+    background: #00000077;
+}
+
+.loader {
+    --d:22px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    box-shadow:
+            calc(1*var(--d))      calc(0*var(--d))     0 0,
+            calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+            calc(0*var(--d))      calc(1*var(--d))     0 2px,
+            calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+            calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+            calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+            calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+    animation: l27 1s infinite steps(8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+@keyframes l27 {
+    100% {transform: rotate(1turn)}
+}

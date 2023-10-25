@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/auth-layout}">
+<head>
+    <title>Xác nhận</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="text-center w-75 m-auto">
+                                <div class="auth-logo">
+                                    <a href="/static" class="logo logo-dark text-center">
+                                            <span class="logo-lg">
+                                                <img th:src="@{/assets/images/logo-dark.png}" alt="" height="22">
+                                            </span>
+                                    </a>
+
+                                    <a href="/static" class="logo logo-light text-center">
+                                            <span class="logo-lg">
+                                                <img th:src="@{/assets/images/logo-light.png}" alt="" height="22">
+                                            </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <div class="mt-4 alert alert-danger"  th:if="${error != null}">
+                                    <div style="font-size: 30px">
+                                        <i class="fe-alert-triangle"></i>
+                                    </div>
+                                    <span th:text="${error}"></span>
+                                </div>
+                                <div class="mt-4 alert alert-success"  th:if="${alert != null}">
+                                    <div style="font-size: 30px">
+                                        <i class="fe-check-circle"></i>
+                                    </div>
+                                    <span th:text="${alert}"></span>
+                                </div>
+                                <a href="/static" class="btn btn-block btn-primary waves-effect waves-light mt-3">Back to Home</a>
+                            </div>
+
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+</div>
+</body>
+</html>

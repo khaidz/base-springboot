@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/blank-layout}">
+<head>
+    <title>Coming Soon</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+
+                    <div class="text-center">
+
+                        <img th:src="@{/assets/images/animat-rocket-color.gif}" alt="" height="160">
+
+                        <h3 class="mt-4">Stay tunned, we're launching very soon</h3>
+                        <p class="text-muted">We're making the system more awesome.</p>
+
+                        <div class="row mt-5 justify-content-center">
+                            <div class="col-md-8">
+                                <div data-countdown="2021/01/17" class="counter-number">
+                                    <div class="coming-box">00 <span>Days</span></div>
+                                    <div class="coming-box">00 <span>Hours</span></div>
+                                    <div class="coming-box">00 <span>Minutes</span></div>
+                                    <div class="coming-box">00 <span>Seconds</span></div>
+                                </div>
+                            </div> <!-- end col-->
+                        </div> <!-- end row-->
+                    </div> <!-- end /.text-center-->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+</div>
+</body>
+</html>

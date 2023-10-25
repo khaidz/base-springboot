@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="pagination(page)">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="alternative-page-datatable_info" role="status"
+                 aria-live="polite">Showing [[${page.getFromElement()}]] to
+                [[${page.getToElement()}]] of [[${page.getTotalElement()}]] entries
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-7 d-flex justify-content-end">
+            <div class="dataTables_paginate paging_full_numbers"
+                 id="alternative-page-datatable_paginate">
+                <ul class="pagination pagination-rounded">
+                    <li class="paginate_button page-item first"
+                        th:classappend="${page.getCurrentPage()!=0?'': 'disabled'}"
+                        id="alternative-page-datatable_first">
+                        <a th:attr="data-page=0" id="page-link-first"
+                           aria-controls="alternative-page-datatable"
+                           data-dt-idx="0" tabindex="0"
+                           class="page-link"><i class="mdi mdi-skip-previous-outline"></i></a>
+                    </li>
+                    <li class="paginate_button page-item previous"
+                        th:classappend="${page.enablePreviousPage()?'': 'disabled'}"
+                        id="alternative-page-datatable_previous">
+                        <a th:attr="data-page=${page.getCurrentPage() - 1}"
+                           id="page-link-previous"
+                           aria-controls="alternative-page-datatable"
+                           data-dt-idx="1" tabindex="0"
+                           class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                    </li>
+                    <li th:each="item: ${page.getShowPage()}" class="paginate_button page-item"
+                        th:classappend="${page.getCurrentPage()==item?'active': ''}">
+                        <a th:attr="data-page=${item}"
+                           aria-controls="alternative-page-datatable"
+                           data-dt-idx="2" tabindex="0"
+                           class="page-link page-link-number">[[${item}]]</a>
+                    </li>
+
+                    <li class="paginate_button page-item next" id="alternative-page-datatable_next"
+                        th:attr="data-page=${page.getCurrentPage() + 1}"
+                        th:classappend="${page.enableNextPage()?'': 'disabled'}">
+                        <a th:attr="data-page=${page.getCurrentPage()+1}" id="page-link-next"
+                           aria-controls="alternative-page-datatable"
+                           data-dt-idx="8"
+                           tabindex="0" class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
+                    <li class="paginate_button page-item last" id="alternative-page-datatable_last"
+                        th:classappend="${page.getCurrentPage()>= page.getTotalPage()-1?'disabled': '' }">
+                        <a th:attr="data-page=${page.getTotalPage()-1}" id="page-link-last"
+                           aria-controls="alternative-page-datatable"
+                           data-dt-idx="9"
+                           tabindex="0" class="page-link"><i class="mdi mdi-skip-next-outline"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.pagination').on('click', '.page-link', function () {
+            $(this).attr('href', getUrl($(this).data('page')))
+        })
+
+        function getUrl(page) {
+            const queryString = window.location.search;
+            let searchParams = new URLSearchParams(queryString);
+            searchParams.set('page', page)
+            let url = location.origin + location.pathname + '?' + urlSearchParamsToText(searchParams);
+            return url;
+        }
+    </script>
+</th:block>
+</body>
+</html>
